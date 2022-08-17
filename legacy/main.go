@@ -11,7 +11,7 @@ func main() {
 	// Printing all products
 	printProducts(service.GetAllProducts())
 
-	newlyAddedProduct := service.AddProduct("new product", "BOOKS", 109.99)
+	newlyAddedProduct := service.AddProduct("new product", model.BOOKS, 109.99)
 
 	// printing the newly added product
 	printProduct(newlyAddedProduct.Id)

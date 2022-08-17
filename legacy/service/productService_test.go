@@ -7,7 +7,7 @@ import (
 )
 
 func TestAddProduct(t *testing.T) {
-	newProduct := AddProduct("new test product", "SAMPLE", 100.23)
+	newProduct := AddProduct("new test product", model.TOYS, 100.23)
 
 	if newProduct.Name != "new test product" {
 		t.Errorf("Not the same product ")
@@ -36,12 +36,12 @@ func TestGetProductById(t *testing.T) {
 		{
 			"With product Id 1",
 			1,
-			&model.Product{Id: 1, Name: "InMem - Grocessory product", ProductType: "GROCESSORY", Price: 100.0},
+			&model.Product{Id: 1, Name: "InMem - Grocessory product", ProductType: model.GROCESSORY, Price: 100.0},
 		},
 		{
 			"With product Id 2",
 			2,
-			&model.Product{Id: 2, Name: "InMem - Scala programming", ProductType: "BOOKS", Price: 55.0},
+			&model.Product{Id: 2, Name: "InMem - Scala programming", ProductType: model.BOOKS, Price: 55.0},
 		},
 	}
 	for _, tt := range tests {

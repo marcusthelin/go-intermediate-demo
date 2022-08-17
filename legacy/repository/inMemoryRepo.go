@@ -41,11 +41,11 @@ func (r InMemoryProductRepo) Update(productToBeUpdated model.Product) bool {
 func NewInMemoryProductRepo() InMemoryProductRepo {
 	inMemDb := InMemoryProductRepo{
 		products: map[int]model.Product{
-			1: model.NewProduct(1, "InMem - Grocessory product", "GROCESSORY", 100.0),
-			2: model.NewProduct(2, "InMem - Scala programming", "BOOKS", 55.0),
-			3: model.NewProduct(3, "InMem - Night lamp", "BABY", 41.46),
-			4: model.NewProduct(4, "InMem - Golang", "BOOKS", 697.57),
-			5: model.NewProduct(5, "InMem - Ball", "TOYS", 295.37),
+			1: model.NewProduct(1, "InMem - Grocessory product", model.GROCESSORY, 100.0),
+			2: model.NewProduct(2, "InMem - Scala programming", model.BOOKS, 55.0),
+			3: model.NewProduct(3, "InMem - Night lamp", model.BABY, 41.46),
+			4: model.NewProduct(4, "InMem - Golang", model.BOOKS, 697.57),
+			5: model.NewProduct(5, "InMem - Ball", model.TOYS, 295.37),
 		},
 	}
 	return inMemDb

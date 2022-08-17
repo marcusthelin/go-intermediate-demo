@@ -15,7 +15,7 @@ func GetProductById(id int) *model.Product {
 	return repo.FindBy(id)
 }
 
-func AddProduct(name, productType string, price float32) *model.Product {
+func AddProduct(name string, productType model.Category, price float32) *model.Product {
 	repo := repository.NewInMemoryProductRepo()
 	newProduct := model.Product{Name: name, ProductType: productType, Price: price}
 
