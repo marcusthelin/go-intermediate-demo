@@ -1,8 +1,8 @@
 package service
 
 import (
-	"intermediate-go/legacy/model"
-	"intermediate-go/legacy/repository"
+	"go-intermediate/legacy/model"
+	"go-intermediate/legacy/repository"
 )
 
 func GetAllProducts() []model.Product {

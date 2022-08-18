@@ -1,19 +1,19 @@
 package repository
 
-import "go-intermediate/legacy/model"
+import "go-intermediate/pre-http/model"
 
 type DbProductRepo struct {
 	products map[int]model.Product
 }
 
-func (r DbProductRepo) GetProductById(id int) *model.Product {
+func (r DbProductRepo) FindBy(id int) *model.Product {
 	if p, ok := r.products[id]; ok {
 		return &p
 	}
 	return nil
 }
 
-func (r DbProductRepo) GetAllProducts() []model.Product {
+func (r DbProductRepo) FindAll() []model.Product {
 	v := make([]model.Product, 0)
 	for _, p := range r.products {
 		v = append(v, p)
@@ -21,15 +21,15 @@ func (r DbProductRepo) GetAllProducts() []model.Product {
 	return v
 }
 
-func (r DbProductRepo) AddProduct(newProduct model.Product) *model.Product {
+func (r DbProductRepo) Save(newProduct model.Product) *model.Product {
 	id := len(r.products) + 1
 	newProduct.Id = id
 	r.products[id] = newProduct
 	return &newProduct
 }
 
-func (r DbProductRepo) UpdateProduct(productToBeUpdated model.Product) bool {
-	if product := r.GetProductById(productToBeUpdated.Id); product != nil {
+func (r DbProductRepo) Update(productToBeUpdated model.Product) bool {
+	if product := r.FindBy(productToBeUpdated.Id); product != nil {
 		r.products[productToBeUpdated.Id] = productToBeUpdated
 		return true
 	}
