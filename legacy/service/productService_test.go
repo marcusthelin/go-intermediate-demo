@@ -36,12 +36,12 @@ func TestGetProductById(t *testing.T) {
 		{
 			"With product Id 1",
 			1,
-			&model.Product{Id: 1, Name: "InMem - Grocessory product", ProductType: model.GROCESSORY, Price: 100.0},
+			&model.Product{Id: 1, Name: "InMem - Grocessory product", Category: model.GROCESSORY, Price: 100.0},
 		},
 		{
 			"With product Id 2",
 			2,
-			&model.Product{Id: 2, Name: "InMem - Scala programming", ProductType: model.BOOKS, Price: 55.0},
+			&model.Product{Id: 2, Name: "InMem - Scala programming", Category: model.BOOKS, Price: 55.0},
 		},
 	}
 	for _, tt := range tests {
