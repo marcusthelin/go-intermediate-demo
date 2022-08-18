@@ -1,6 +1,6 @@
 package repository
 
-import "go-intermediate/pre-http/model"
+import "pre-http/model"
 
 type DbProductRepo struct {
 	products map[int]model.Product

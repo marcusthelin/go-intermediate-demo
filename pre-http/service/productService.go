@@ -1,8 +1,8 @@
 package service
 
 import (
-	"go-intermediate/pre-http/model"
-	"go-intermediate/pre-http/repository"
+	"pre-http/model"
+	"pre-http/repository"
 )
 
 type ProductService struct {
@@ -10,7 +10,6 @@ type ProductService struct {
 }
 
 func (ps *ProductService) GetAllProducts() []model.Product {
-
 	return ps.repo.FindAll()
 }
 

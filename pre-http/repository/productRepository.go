@@ -1,6 +1,6 @@
 package repository
 
-import "go-intermediate/pre-http/model"
+import "pre-http/model"
 
 type ProductRepository interface {
 	FindBy(id int) *model.Product

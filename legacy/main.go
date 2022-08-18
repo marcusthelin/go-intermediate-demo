@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"go-intermediate/legacy/model"
-	"go-intermediate/legacy/service"
+	"legacy/model"
+	"legacy/service"
 )
 
 func main() {

@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
-	"go-intermediate/pre-http/model"
-	"go-intermediate/pre-http/repository"
-	"go-intermediate/pre-http/service"
+	"pre-http/model"
+	"pre-http/repository"
+	"pre-http/service"
 )
 
 func main() {

@@ -1,8 +1,8 @@
 package service
 
 import (
-	"go-intermediate/pre-http/model"
-	"go-intermediate/pre-http/repository"
+	"pre-http/model"
+	"pre-http/repository"
 	"reflect"
 	"testing"
 )

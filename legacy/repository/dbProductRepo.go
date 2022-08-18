@@ -1,6 +1,6 @@
 package repository
 
-import "go-intermediate/legacy/model"
+import "legacy/model"
 
 type DbProductRepo struct {
 	products map[int]model.Product

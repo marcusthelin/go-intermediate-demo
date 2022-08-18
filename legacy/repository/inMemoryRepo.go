@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"go-intermediate/legacy/model"
+	"legacy/model"
 )
 
 type InMemoryProductRepo struct {

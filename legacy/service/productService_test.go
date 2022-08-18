@@ -1,7 +1,7 @@
 package service
 
 import (
-	"go-intermediate/legacy/model"
+	"legacy/model"
 	"reflect"
 	"testing"
 )
