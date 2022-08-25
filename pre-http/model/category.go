@@ -1,5 +1,7 @@
 package model
 
+import "encoding/json"
+
 type Category int
 
 const (
@@ -21,4 +23,16 @@ func (c Category) String() string {
 		return "TOYS"
 	}
 	return "unknown"
+}
+
+func (c Category) UnmarshalJSON(data []byte) (err error) {
+	var category string
+	if err := json.Unmarshal(data, &category); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (c Category) MarshalJSON() ([]byte, error) {
+	return json.Marshal(c.String())
 }
