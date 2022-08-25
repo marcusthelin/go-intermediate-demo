@@ -6,6 +6,14 @@ import (
 
 type InMemoryProductRepo struct {
 	products map[int]model.Product
+	/*
+		{
+			"key": "value"
+			1: {1, "name of product", category, price}
+			2: {2, "name of product", category, price}
+			3: {2, "name of product", category, price}
+		}
+	*/
 }
 
 func (r InMemoryProductRepo) FindBy(id int) *model.Product {
