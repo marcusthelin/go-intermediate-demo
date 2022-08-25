@@ -19,6 +19,7 @@ func manageProducts(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			log.Println("Not able to parse request: ", err.Error())
 			w.WriteHeader(400)
+			w.Write([]byte(err.Error()))
 			return
 		}
 		newProduct := ps.AddProduct(request.Name, request.Category, request.Price)
