@@ -9,6 +9,15 @@ import (
 	"pre-http/service"
 )
 
+type Struct1 struct {
+	Name string
+}
+
+type Struct2 struct {
+	Struct1 Struct1 `json:"some_struct"`
+	City    string  `json:"my_city"`
+}
+
 func manageProducts(w http.ResponseWriter, r *http.Request) {
 	// handle add user flow
 	ps := service.NewProductService(repository.NewInMemoryProductRepo())
@@ -26,8 +35,12 @@ func manageProducts(w http.ResponseWriter, r *http.Request) {
 
 		writeResponse(w, newProduct)
 	} else {
-		products := ps.GetAllProducts()
-		writeResponse(w, products)
+		//products := ps.GetAllProducts()
+		struct2 := Struct2{
+			Struct1: Struct1{Name: "test"},
+			City:    "Delhi",
+		}
+		writeResponse(w, struct2)
 	}
 }
 
