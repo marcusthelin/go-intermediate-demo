@@ -1,38 +1,23 @@
 package main
 
 import (
-	"fmt"
-	"pre-http/model"
+	"encoding/json"
+	"log"
+	"net/http"
 	"pre-http/repository"
 	"pre-http/service"
 )
 
-func main() {
-	// creating instance of product service
+func getAllProducts(w http.ResponseWriter, r *http.Request) {
 	ps := service.NewProductService(repository.NewInMemoryProductRepo())
+	products := ps.GetAllProducts()
 
-	// Printing all products
-	printProducts(ps.GetAllProducts())
-
-	newlyAddedProduct := ps.AddProduct("new product", model.BOOKS, 109.99)
-
-	// printing the newly added product
-	printProduct(ps, newlyAddedProduct.Id)
-
+	w.Header().Add("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(products)
 }
 
-func printProducts(products []model.Product) {
-	fmt.Println("### Printing Products ###")
-	for _, p := range products {
-		fmt.Println(p)
-	}
-	fmt.Println("### End ###")
-}
+func main() {
+	http.HandleFunc("/products", getAllProducts)
 
-func printProduct(ps *service.ProductService, id int) {
-	if product := ps.GetProductById(id); product != nil {
-		fmt.Println("PRODUCT: ", product)
-	} else {
-		fmt.Println(fmt.Sprintf("Product with id %d does not exist", id))
-	}
+	log.Fatal(http.ListenAndServe("localhost:8080", nil))
 }
