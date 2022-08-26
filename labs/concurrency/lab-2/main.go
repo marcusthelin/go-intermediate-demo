@@ -11,9 +11,9 @@ import (
 )
 
 func main() {
-	t1 := time.Now()
-
 	topDomainNames, err := readDomainsFromCSV()
+
+	t1 := time.Now()
 	if err != nil {
 		log.Fatal("Error while reading domains ", err.Error())
 	}
