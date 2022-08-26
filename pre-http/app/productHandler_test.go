@@ -23,7 +23,7 @@ func Test_get_all_products_ok(t *testing.T) {
 
 	pr.getAllProducts(recorder, req)
 
-	if recorder.Code != http.StatusNotFound {
+	if recorder.Code != http.StatusOK {
 		t.Error("unexpected status code, expected 200 and got 404")
 	}
 }
