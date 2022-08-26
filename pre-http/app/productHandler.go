@@ -25,9 +25,7 @@ func (pr ProductRoute) saveProduct(w http.ResponseWriter, r *http.Request) {
 	err := json.NewDecoder(r.Body).Decode(&request)
 	if err != nil {
 		log.Println("Not able to parse request: ", err.Error())
-
 		errMessage := map[string]string{"message": err.Error()}
-
 		writeResponse(w, errMessage, http.StatusBadRequest)
 		return
 	}
