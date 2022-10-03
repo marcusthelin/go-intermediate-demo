@@ -1,37 +1,54 @@
 package service
 
 import (
-	"pre-http-lab/model"
-	"pre-http-lab/repository"
 	"reflect"
 	"testing"
+
+	"pre-http-lab/mocks/repository"
+	"pre-http-lab/model"
+
+	"github.com/golang/mock/gomock"
 )
 
 func TestAddProduct(t *testing.T) {
-	ps := ProductService{repo: repository.NewInMemoryProductRepo()}
-	newProduct := ps.AddProduct("new test product", model.TOYS, 100.23)
+	ctrl := gomock.NewController(t)
+	mockRepo := repository.NewMockProductRepository(ctrl)
+	ps := ProductService{repo: mockRepo}
 
-	if newProduct.Name != "new test product" {
-		t.Errorf("Not the same product ")
+	expectedProduct := model.Product{
+		Name:     "Hello World",
+		Category: model.BOOKS,
+		Price:    100.22,
 	}
 
-	if len(ps.GetAllProducts()) != 6 {
-		t.Errorf("Expected product list should have 6 products")
+	mockRepo.EXPECT().Save(expectedProduct).Return(&expectedProduct)
+	mockRepo.EXPECT().FindAll().Return([]model.Product{expectedProduct})
+
+	ps.AddProduct("Hello World", model.BOOKS, 100.22)
+	allProducts := ps.GetAllProducts()
+	if len(allProducts) != 1 {
+		t.Errorf("Expected product list should have 6 products, got %v", len(allProducts))
 	}
 }
 
 func TestGetAllProducts(t *testing.T) {
-	ps := ProductService{repo: repository.NewInMemoryProductRepo()}
+	ctrl := gomock.NewController(t)
+	mockRepo := repository.NewMockProductRepository(ctrl)
+	ps := ProductService{repo: mockRepo}
 
-	if got := ps.GetAllProducts(); got != nil {
-		if len(got) != 5 {
+	mockRepo.EXPECT().FindAll().MinTimes(1)
+
+	if products := ps.GetAllProducts(); products != nil {
+		if len(products) != 5 {
 			t.Errorf("Expected products list should have 5 products")
 		}
 	}
 }
 
 func TestGetProductById(t *testing.T) {
-	ps := ProductService{repo: repository.NewInMemoryProductRepo()}
+	ctrl := gomock.NewController(t)
+	mockRepo := repository.NewMockProductRepository(ctrl)
+	ps := ProductService{repo: mockRepo}
 
 	tests := []struct {
 		name string
@@ -49,8 +66,10 @@ func TestGetProductById(t *testing.T) {
 			&model.Product{Id: 2, Name: "InMem - Scala programming", Category: model.BOOKS, Price: 55.0},
 		},
 	}
+
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			mockRepo.EXPECT().FindBy(tt.id).Return(tt.want)
 			if got := ps.GetProductById(tt.id); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("GetProductById() = %v, want %v", got, tt.want)
 			}
